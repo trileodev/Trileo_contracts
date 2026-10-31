@@ -958,6 +958,76 @@ def is_sessions_page_response(value: Any) -> bool:
     return _is_valid("https://contracts.trileo.dev/v1/sessions/sessions-page-response.schema.json", value)
 
 
+def validate_get_upload_query(value: Any) -> None:
+    """Raise ContractViolation unless *value* is a valid GetUploadQuery."""
+    _validate("https://contracts.trileo.dev/v1/uploads/get-upload-query.schema.json", value)
+
+
+def is_get_upload_query(value: Any) -> bool:
+    """True when *value* is a valid GetUploadQuery."""
+    return _is_valid("https://contracts.trileo.dev/v1/uploads/get-upload-query.schema.json", value)
+
+
+def validate_list_uploads_query(value: Any) -> None:
+    """Raise ContractViolation unless *value* is a valid ListUploadsQuery."""
+    _validate("https://contracts.trileo.dev/v1/uploads/list-uploads-query.schema.json", value)
+
+
+def is_list_uploads_query(value: Any) -> bool:
+    """True when *value* is a valid ListUploadsQuery."""
+    return _is_valid("https://contracts.trileo.dev/v1/uploads/list-uploads-query.schema.json", value)
+
+
+def validate_media_type(value: Any) -> None:
+    """Raise ContractViolation unless *value* is a valid MediaType."""
+    _validate("https://contracts.trileo.dev/v1/uploads/media-type.schema.json", value)
+
+
+def is_media_type(value: Any) -> bool:
+    """True when *value* is a valid MediaType."""
+    return _is_valid("https://contracts.trileo.dev/v1/uploads/media-type.schema.json", value)
+
+
+def validate_upload_original_name(value: Any) -> None:
+    """Raise ContractViolation unless *value* is a valid UploadOriginalName."""
+    _validate("https://contracts.trileo.dev/v1/uploads/upload-original-name.schema.json", value)
+
+
+def is_upload_original_name(value: Any) -> bool:
+    """True when *value* is a valid UploadOriginalName."""
+    return _is_valid("https://contracts.trileo.dev/v1/uploads/upload-original-name.schema.json", value)
+
+
+def validate_upload_response(value: Any) -> None:
+    """Raise ContractViolation unless *value* is a valid UploadResponse."""
+    _validate("https://contracts.trileo.dev/v1/uploads/upload-response.schema.json", value)
+
+
+def is_upload_response(value: Any) -> bool:
+    """True when *value* is a valid UploadResponse."""
+    return _is_valid("https://contracts.trileo.dev/v1/uploads/upload-response.schema.json", value)
+
+
+def validate_upload_status(value: Any) -> None:
+    """Raise ContractViolation unless *value* is a valid UploadStatus."""
+    _validate("https://contracts.trileo.dev/v1/uploads/upload-status.schema.json", value)
+
+
+def is_upload_status(value: Any) -> bool:
+    """True when *value* is a valid UploadStatus."""
+    return _is_valid("https://contracts.trileo.dev/v1/uploads/upload-status.schema.json", value)
+
+
+def validate_uploads_page_response(value: Any) -> None:
+    """Raise ContractViolation unless *value* is a valid UploadsPageResponse."""
+    _validate("https://contracts.trileo.dev/v1/uploads/uploads-page-response.schema.json", value)
+
+
+def is_uploads_page_response(value: Any) -> bool:
+    """True when *value* is a valid UploadsPageResponse."""
+    return _is_valid("https://contracts.trileo.dev/v1/uploads/uploads-page-response.schema.json", value)
+
+
 def validate_current_user_response(value: Any) -> None:
     """Raise ContractViolation unless *value* is a valid CurrentUserResponse."""
     _validate("https://contracts.trileo.dev/v1/users/current-user-response.schema.json", value)

@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contracts.trileo.dev/v1/uploads/upload-original-name.schema.json",
+  "title": "UploadOriginalName",
+  "type": "string",
+  "minLength": 1,
+  "maxLength": 255,
+  "pattern": "^[^\\s/\\\\\\u0000-\\u001f\\u007f](?:[^/\\\\\\u0000-\\u001f\\u007f]*[^\\s/\\\\\\u0000-\\u001f\\u007f])?$"
+}

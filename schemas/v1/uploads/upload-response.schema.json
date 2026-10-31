@@ -1,0 +1,160 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contracts.trileo.dev/v1/uploads/upload-response.schema.json",
+  "title": "UploadResponse",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "projectId",
+    "organizationId",
+    "uploadedByUserId",
+    "originalName",
+    "mediaType",
+    "sizeBytes",
+    "sha256",
+    "status",
+    "statusReasonCode",
+    "readyAt",
+    "createdAt",
+    "updatedAt"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "projectId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "organizationId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "uploadedByUserId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "originalName": {
+      "$ref": "upload-original-name.schema.json"
+    },
+    "mediaType": {
+      "$ref": "media-type.schema.json"
+    },
+    "sizeBytes": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "status": {
+      "$ref": "upload-status.schema.json"
+    },
+    "statusReasonCode": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[A-Z][A-Z0-9_]{0,63}$"
+    },
+    "readyAt": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "pending"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "readyAt": {
+            "type": "null"
+          },
+          "statusReasonCode": {
+            "type": "null"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "ready"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "readyAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "statusReasonCode": {
+            "type": "null"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "rejected"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "readyAt": {
+            "type": "null"
+          },
+          "statusReasonCode": {
+            "type": "string",
+            "pattern": "^[A-Z][A-Z0-9_]{0,63}$"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "failed"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "readyAt": {
+            "type": "null"
+          },
+          "statusReasonCode": {
+            "type": "string",
+            "pattern": "^[A-Z][A-Z0-9_]{0,63}$"
+          }
+        }
+      }
+    }
+  ]
+}

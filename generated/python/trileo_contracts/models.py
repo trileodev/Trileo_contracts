@@ -479,6 +479,48 @@ class SessionsPageResponse(TypedDict):
     nextCursor: NotRequired[str]
 
 
+class GetUploadQuery(TypedDict):
+    projectId: str
+    uploadId: str
+
+
+class ListUploadsQuery(TypedDict):
+    projectId: str
+    status: NotRequired[UploadStatus]
+    cursor: NotRequired[str]
+    limit: NotRequired[int]
+
+
+MediaType = str
+
+
+UploadOriginalName = str
+
+
+class UploadResponse(TypedDict):
+    id: str
+    projectId: str
+    organizationId: str
+    uploadedByUserId: str
+    originalName: UploadOriginalName
+    mediaType: MediaType
+    sizeBytes: int
+    sha256: str
+    status: UploadStatus
+    statusReasonCode: Any
+    readyAt: Any
+    createdAt: str
+    updatedAt: str
+
+
+UploadStatus = Literal["pending", "ready", "rejected", "failed"]
+
+
+class UploadsPageResponse(TypedDict):
+    items: list[UploadResponse]
+    nextCursor: NotRequired[str]
+
+
 class CurrentUserResponse(TypedDict):
     id: str
     firstName: str
