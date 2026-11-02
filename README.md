@@ -11,6 +11,14 @@ Use the public package entry point from consumers. Do not deep-import generated 
 Organization-scoped operations use `OrganizationServiceRequest`, which adds a required
 `organizationId` beside the trusted actor and correlation ID. The organization ID selects the
 requested scope; it is not proof of membership. Main and Project must re-authorize each operation.
+
+The envelope may also carry an optional `organizationRole` (`org_admin` | `member`). It is a
+trusted membership fact with exactly one legitimate setter: the Gateway, which copies it from
+Main's `organizations.get.v1` reply for that `organizationId` on every request. Main ignores any
+`organizationRole` it receives and reads the role from its own membership table. Project relies on
+it and treats its absence as deny. The AI service and every other publisher must never set it.
+NATS has no publisher credentials yet, so this rule is enforced by review and a static check, not
+by the transport. Organization context lives on this envelope; `ActorContext` is unchanged.
 The existing `ServiceRequest` and owner-scoped `projects.*.v1` subjects remain unchanged.
 
 The new `projects.*.v2` subjects use the existing project command/query payloads inside
@@ -23,8 +31,9 @@ Organization create/list/get-personal, invitation list-mine and invitation accep
 organization, membership and invitation operations use `OrganizationServiceRequest`. Responses
 use the existing `ServiceResponse` wrapper. Removal/revocation operations return an empty data object.
 Invitation acceptance must verify the actor's verified email matches the invitation; knowing
-an invitation ID grants no authority. Requested member/collaborator roles are policy inputs,
-never trusted actor roles.
+an invitation ID grants no authority. Requested member/collaborator roles in a payload are policy
+inputs, never trusted actor roles; the only trusted organization role is the Gateway-set envelope
+`organizationRole` described above.
 
 ## Project uploads (read side)
 

@@ -28,6 +28,40 @@
     }
   },
   {
+    "schema": "https://contracts.trileo.dev/v1/common/organization-service-request.schema.json",
+    "data": {
+      "version": 1,
+      "correlationId": "44444444-4444-4444-8444-444444444444",
+      "organizationId": "22222222-2222-4222-8222-222222222222",
+      "organizationRole": "org_admin",
+      "actor": {
+        "userId": "11111111-1111-4111-8111-111111111111",
+        "sessionId": "33333333-3333-4333-8333-333333333333",
+        "roles": [
+          "user"
+        ]
+      },
+      "payload": {}
+    }
+  },
+  {
+    "schema": "https://contracts.trileo.dev/v1/common/organization-service-request.schema.json",
+    "data": {
+      "version": 1,
+      "correlationId": "44444444-4444-4444-8444-444444444444",
+      "organizationId": "22222222-2222-4222-8222-222222222222",
+      "organizationRole": "member",
+      "actor": {
+        "userId": "11111111-1111-4111-8111-111111111111",
+        "sessionId": "33333333-3333-4333-8333-333333333333",
+        "roles": [
+          "user"
+        ]
+      },
+      "payload": {}
+    }
+  },
+  {
     "schema": "https://contracts.trileo.dev/v1/organizations/create-organization-command.schema.json",
     "data": {
       "name": "Studio"

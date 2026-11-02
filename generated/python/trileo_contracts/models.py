@@ -235,6 +235,7 @@ class OrganizationServiceRequest(TypedDict):
     idempotencyKey: NotRequired[str]
     actor: ActorContext
     organizationId: str
+    organizationRole: NotRequired[OrganizationRole]
     payload: dict[str, Any]
 
 

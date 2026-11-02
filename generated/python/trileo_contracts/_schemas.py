@@ -963,6 +963,10 @@ SCHEMAS: Final[dict[str, dict[str, Any]]] = {
                 "type": "string",
                 "format": "uuid",
             },
+            "organizationRole": {
+                "description": "Trusted membership fact. Set only by the Gateway, copied from Main's organizations.get.v1 reply for this organizationId. Main ignores it. The AI service and every other publisher must never set it. Project denies when it is absent.",
+                "$ref": "../organizations/organization-role.schema.json",
+            },
             "payload": {
                 "type": "object",
             },
