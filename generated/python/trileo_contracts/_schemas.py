@@ -2113,7 +2113,7 @@ SCHEMAS: Final[dict[str, dict[str, Any]]] = {
         "title": "MediaType",
         "type": "string",
         "maxLength": 255,
-        "pattern": "^[a-z0-9][a-z0-9!#$&^_.+-]{0,126}/[a-z0-9][a-z0-9!#$&^_.+-]{0,126}$",
+        "pattern": "^[a-z0-9][a-z0-9!#$&^_.+-]{0,126}/[a-z0-9][a-z0-9!#$&^_.+-]{0,126}$(?![\\r\\n\\u2028\\u2029])",
     },
     "https://contracts.trileo.dev/v1/uploads/upload-original-name.schema.json": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -2175,7 +2175,7 @@ SCHEMAS: Final[dict[str, dict[str, Any]]] = {
             },
             "sha256": {
                 "type": "string",
-                "pattern": "^[0-9a-f]{64}$",
+                "pattern": "^[0-9a-f]{64}$(?![\\r\\n\\u2028\\u2029])",
             },
             "status": {
                 "$ref": "upload-status.schema.json",
@@ -2185,7 +2185,7 @@ SCHEMAS: Final[dict[str, dict[str, Any]]] = {
                     "string",
                     "null",
                 ],
-                "pattern": "^[A-Z][A-Z0-9_]{0,63}$",
+                "pattern": "^[A-Z][A-Z0-9_]{0,63}$(?![\\r\\n\\u2028\\u2029])",
             },
             "readyAt": {
                 "type": [
@@ -2258,7 +2258,7 @@ SCHEMAS: Final[dict[str, dict[str, Any]]] = {
                         },
                         "statusReasonCode": {
                             "type": "string",
-                            "pattern": "^[A-Z][A-Z0-9_]{0,63}$",
+                            "pattern": "^[A-Z][A-Z0-9_]{0,63}$(?![\\r\\n\\u2028\\u2029])",
                         },
                     },
                 },
@@ -2278,7 +2278,7 @@ SCHEMAS: Final[dict[str, dict[str, Any]]] = {
                         },
                         "statusReasonCode": {
                             "type": "string",
-                            "pattern": "^[A-Z][A-Z0-9_]{0,63}$",
+                            "pattern": "^[A-Z][A-Z0-9_]{0,63}$(?![\\r\\n\\u2028\\u2029])",
                         },
                     },
                 },

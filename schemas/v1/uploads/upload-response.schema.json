@@ -48,7 +48,7 @@
     },
     "sha256": {
       "type": "string",
-      "pattern": "^[0-9a-f]{64}$"
+      "pattern": "^[0-9a-f]{64}$(?![\\r\\n\\u2028\\u2029])"
     },
     "status": {
       "$ref": "upload-status.schema.json"
@@ -58,7 +58,7 @@
         "string",
         "null"
       ],
-      "pattern": "^[A-Z][A-Z0-9_]{0,63}$"
+      "pattern": "^[A-Z][A-Z0-9_]{0,63}$(?![\\r\\n\\u2028\\u2029])"
     },
     "readyAt": {
       "type": [
@@ -131,7 +131,7 @@
           },
           "statusReasonCode": {
             "type": "string",
-            "pattern": "^[A-Z][A-Z0-9_]{0,63}$"
+            "pattern": "^[A-Z][A-Z0-9_]{0,63}$(?![\\r\\n\\u2028\\u2029])"
           }
         }
       }
@@ -151,7 +151,7 @@
           },
           "statusReasonCode": {
             "type": "string",
-            "pattern": "^[A-Z][A-Z0-9_]{0,63}$"
+            "pattern": "^[A-Z][A-Z0-9_]{0,63}$(?![\\r\\n\\u2028\\u2029])"
           }
         }
       }
