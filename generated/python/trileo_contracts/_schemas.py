@@ -2056,6 +2056,271 @@ SCHEMAS: Final[dict[str, dict[str, Any]]] = {
             },
         },
     },
+    "https://contracts.trileo.dev/v1/uploads/get-upload-query.schema.json": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "$id": "https://contracts.trileo.dev/v1/uploads/get-upload-query.schema.json",
+        "title": "GetUploadQuery",
+        "type": "object",
+        "additionalProperties": False,
+        "required": [
+            "projectId",
+            "uploadId",
+        ],
+        "properties": {
+            "projectId": {
+                "type": "string",
+                "format": "uuid",
+            },
+            "uploadId": {
+                "type": "string",
+                "format": "uuid",
+            },
+        },
+    },
+    "https://contracts.trileo.dev/v1/uploads/list-uploads-query.schema.json": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "$id": "https://contracts.trileo.dev/v1/uploads/list-uploads-query.schema.json",
+        "title": "ListUploadsQuery",
+        "type": "object",
+        "additionalProperties": False,
+        "required": [
+            "projectId",
+        ],
+        "properties": {
+            "projectId": {
+                "type": "string",
+                "format": "uuid",
+            },
+            "status": {
+                "$ref": "upload-status.schema.json",
+            },
+            "cursor": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 512,
+            },
+            "limit": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 50,
+                "default": 20,
+            },
+        },
+    },
+    "https://contracts.trileo.dev/v1/uploads/media-type.schema.json": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "$id": "https://contracts.trileo.dev/v1/uploads/media-type.schema.json",
+        "title": "MediaType",
+        "type": "string",
+        "maxLength": 255,
+        "pattern": "^[a-z0-9][a-z0-9!#$&^_.+-]{0,126}/[a-z0-9][a-z0-9!#$&^_.+-]{0,126}$(?![\\r\\n\\u2028\\u2029])",
+    },
+    "https://contracts.trileo.dev/v1/uploads/upload-original-name.schema.json": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "$id": "https://contracts.trileo.dev/v1/uploads/upload-original-name.schema.json",
+        "title": "UploadOriginalName",
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 255,
+        "pattern": "^[^/\\\\\\u0000-\\u001f\\u007f-\\u009f\\u061c\\u200e\\u200f\\u202a-\\u202e\\u2066-\\u2069\\ufeff\\u0020\\u00a0\\u1680\\u2000-\\u200a\\u2028\\u2029\\u202f\\u205f\\u3000](?:[^/\\\\\\u0000-\\u001f\\u007f-\\u009f\\u061c\\u200e\\u200f\\u202a-\\u202e\\u2066-\\u2069\\ufeff]*[^/\\\\\\u0000-\\u001f\\u007f-\\u009f\\u061c\\u200e\\u200f\\u202a-\\u202e\\u2066-\\u2069\\ufeff\\u0020\\u00a0\\u1680\\u2000-\\u200a\\u2028\\u2029\\u202f\\u205f\\u3000])?$(?![\\r\\n\\u2028\\u2029])",
+        "description": "Display-only filename. Rejects path separators, C0/C1 controls, BOM and bidi controls everywhere; Unicode whitespace is allowed only inside the name. Explicit character ranges keep JavaScript and Python validation identical.",
+    },
+    "https://contracts.trileo.dev/v1/uploads/upload-response.schema.json": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "$id": "https://contracts.trileo.dev/v1/uploads/upload-response.schema.json",
+        "title": "UploadResponse",
+        "type": "object",
+        "additionalProperties": False,
+        "required": [
+            "id",
+            "projectId",
+            "organizationId",
+            "uploadedByUserId",
+            "originalName",
+            "mediaType",
+            "sizeBytes",
+            "sha256",
+            "status",
+            "statusReasonCode",
+            "readyAt",
+            "createdAt",
+            "updatedAt",
+        ],
+        "properties": {
+            "id": {
+                "type": "string",
+                "format": "uuid",
+            },
+            "projectId": {
+                "type": "string",
+                "format": "uuid",
+            },
+            "organizationId": {
+                "type": "string",
+                "format": "uuid",
+            },
+            "uploadedByUserId": {
+                "type": "string",
+                "format": "uuid",
+            },
+            "originalName": {
+                "$ref": "upload-original-name.schema.json",
+            },
+            "mediaType": {
+                "$ref": "media-type.schema.json",
+            },
+            "sizeBytes": {
+                "type": "integer",
+                "minimum": 1,
+            },
+            "sha256": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$(?![\\r\\n\\u2028\\u2029])",
+            },
+            "status": {
+                "$ref": "upload-status.schema.json",
+            },
+            "statusReasonCode": {
+                "type": [
+                    "string",
+                    "null",
+                ],
+                "pattern": "^[A-Z][A-Z0-9_]{0,63}$(?![\\r\\n\\u2028\\u2029])",
+            },
+            "readyAt": {
+                "type": [
+                    "string",
+                    "null",
+                ],
+                "format": "date-time",
+            },
+            "createdAt": {
+                "type": "string",
+                "format": "date-time",
+            },
+            "updatedAt": {
+                "type": "string",
+                "format": "date-time",
+            },
+        },
+        "allOf": [
+            {
+                "if": {
+                    "properties": {
+                        "status": {
+                            "const": "pending",
+                        },
+                    },
+                },
+                "then": {
+                    "properties": {
+                        "readyAt": {
+                            "type": "null",
+                        },
+                        "statusReasonCode": {
+                            "type": "null",
+                        },
+                    },
+                },
+            },
+            {
+                "if": {
+                    "properties": {
+                        "status": {
+                            "const": "ready",
+                        },
+                    },
+                },
+                "then": {
+                    "properties": {
+                        "readyAt": {
+                            "type": "string",
+                            "format": "date-time",
+                        },
+                        "statusReasonCode": {
+                            "type": "null",
+                        },
+                    },
+                },
+            },
+            {
+                "if": {
+                    "properties": {
+                        "status": {
+                            "const": "rejected",
+                        },
+                    },
+                },
+                "then": {
+                    "properties": {
+                        "readyAt": {
+                            "type": "null",
+                        },
+                        "statusReasonCode": {
+                            "type": "string",
+                            "pattern": "^[A-Z][A-Z0-9_]{0,63}$(?![\\r\\n\\u2028\\u2029])",
+                        },
+                    },
+                },
+            },
+            {
+                "if": {
+                    "properties": {
+                        "status": {
+                            "const": "failed",
+                        },
+                    },
+                },
+                "then": {
+                    "properties": {
+                        "readyAt": {
+                            "type": "null",
+                        },
+                        "statusReasonCode": {
+                            "type": "string",
+                            "pattern": "^[A-Z][A-Z0-9_]{0,63}$(?![\\r\\n\\u2028\\u2029])",
+                        },
+                    },
+                },
+            },
+        ],
+    },
+    "https://contracts.trileo.dev/v1/uploads/upload-status.schema.json": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "$id": "https://contracts.trileo.dev/v1/uploads/upload-status.schema.json",
+        "title": "UploadStatus",
+        "type": "string",
+        "enum": [
+            "pending",
+            "ready",
+            "rejected",
+            "failed",
+        ],
+    },
+    "https://contracts.trileo.dev/v1/uploads/uploads-page-response.schema.json": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "$id": "https://contracts.trileo.dev/v1/uploads/uploads-page-response.schema.json",
+        "title": "UploadsPageResponse",
+        "type": "object",
+        "additionalProperties": False,
+        "required": [
+            "items",
+        ],
+        "properties": {
+            "items": {
+                "type": "array",
+                "maxItems": 50,
+                "items": {
+                    "$ref": "upload-response.schema.json",
+                },
+            },
+            "nextCursor": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 512,
+            },
+        },
+    },
     "https://contracts.trileo.dev/v1/users/current-user-response.schema.json": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "$id": "https://contracts.trileo.dev/v1/users/current-user-response.schema.json",
@@ -2213,6 +2478,13 @@ SCHEMA_BY_TITLE: Final[dict[str, str]] = {
     "RevokeSessionCommand": "https://contracts.trileo.dev/v1/sessions/revoke-session-command.schema.json",
     "SessionResponse": "https://contracts.trileo.dev/v1/sessions/session-response.schema.json",
     "SessionsPageResponse": "https://contracts.trileo.dev/v1/sessions/sessions-page-response.schema.json",
+    "GetUploadQuery": "https://contracts.trileo.dev/v1/uploads/get-upload-query.schema.json",
+    "ListUploadsQuery": "https://contracts.trileo.dev/v1/uploads/list-uploads-query.schema.json",
+    "MediaType": "https://contracts.trileo.dev/v1/uploads/media-type.schema.json",
+    "UploadOriginalName": "https://contracts.trileo.dev/v1/uploads/upload-original-name.schema.json",
+    "UploadResponse": "https://contracts.trileo.dev/v1/uploads/upload-response.schema.json",
+    "UploadStatus": "https://contracts.trileo.dev/v1/uploads/upload-status.schema.json",
+    "UploadsPageResponse": "https://contracts.trileo.dev/v1/uploads/uploads-page-response.schema.json",
     "CurrentUserResponse": "https://contracts.trileo.dev/v1/users/current-user-response.schema.json",
     "GetCurrentUserQuery": "https://contracts.trileo.dev/v1/users/get-current-user-query.schema.json",
 }

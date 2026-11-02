@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contracts.trileo.dev/v1/uploads/upload-original-name.schema.json",
+  "title": "UploadOriginalName",
+  "type": "string",
+  "minLength": 1,
+  "maxLength": 255,
+  "pattern": "^[^/\\\\\\u0000-\\u001f\\u007f-\\u009f\\u061c\\u200e\\u200f\\u202a-\\u202e\\u2066-\\u2069\\ufeff\\u0020\\u00a0\\u1680\\u2000-\\u200a\\u2028\\u2029\\u202f\\u205f\\u3000](?:[^/\\\\\\u0000-\\u001f\\u007f-\\u009f\\u061c\\u200e\\u200f\\u202a-\\u202e\\u2066-\\u2069\\ufeff]*[^/\\\\\\u0000-\\u001f\\u007f-\\u009f\\u061c\\u200e\\u200f\\u202a-\\u202e\\u2066-\\u2069\\ufeff\\u0020\\u00a0\\u1680\\u2000-\\u200a\\u2028\\u2029\\u202f\\u205f\\u3000])?$(?![\\r\\n\\u2028\\u2029])",
+  "description": "Display-only filename. Rejects path separators, C0/C1 controls, BOM and bidi controls everywhere; Unicode whitespace is allowed only inside the name. Explicit character ranges keep JavaScript and Python validation identical."
+}

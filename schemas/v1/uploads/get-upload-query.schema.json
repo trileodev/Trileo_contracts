@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contracts.trileo.dev/v1/uploads/get-upload-query.schema.json",
+  "title": "GetUploadQuery",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "projectId",
+    "uploadId"
+  ],
+  "properties": {
+    "projectId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "uploadId": {
+      "type": "string",
+      "format": "uuid"
+    }
+  }
+}

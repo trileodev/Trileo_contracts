@@ -35,6 +35,32 @@ an invitation ID grants no authority. Requested member/collaborator roles in a p
 inputs, never trusted actor roles; the only trusted organization role is the Gateway-set envelope
 `organizationRole` described above.
 
+## Project uploads (read side)
+
+`uploads.get.v1` (`GetUploadQuery` → `UploadResponse`) and `uploads.list.v1`
+(`ListUploadsQuery` → `UploadsPageResponse`) use `OrganizationServiceRequest`. **No service
+serves or calls them until W4**, which also defines `uploads.create.v1` and the byte-transfer and
+completion subjects once the transport is chosen. Lists are ordered by `createdAt` descending,
+then `id` descending; without a `status` filter every status is listed.
+
+- `UploadResponse` never carries the storage driver or storage key (`additionalProperties: false`).
+  Where bytes are stored is internal to Project.
+- `organizationId`, `uploadedByUserId`, `status`, `statusReasonCode` and `readyAt` are
+  server-decided. Clients never supply them.
+- `MediaType` is a format, not an enum: the allowed list is `UPLOAD_ALLOWED_TYPES` config.
+- `statusReasonCode` is a format, not an enum, so new codes need no contract change. A `pending`
+  upload has neither `readyAt` nor a reason code; `ready` has `readyAt` and no reason code;
+  `rejected` and `failed` have a reason code and no `readyAt`. Initial codes:
+
+| Status | Code | Meaning |
+|---|---|---|
+| `rejected` | `TYPE_NOT_ALLOWED` | The sniffed type is not in `UPLOAD_ALLOWED_TYPES` |
+| `rejected` | `TYPE_MISMATCH` | The sniffed type differs from the declared `mediaType` |
+| `rejected` | `SIZE_LIMIT_EXCEEDED` | Over `UPLOAD_MAX_FILE_BYTES` |
+| `rejected` | `SIZE_MISMATCH`, `HASH_MISMATCH` | The received bytes differ from the declaration |
+| `failed` | `STORAGE_ERROR` | The storage driver failed |
+| `failed` | `UPLOAD_EXPIRED` | The stale-upload reaper ended a `pending` upload |
+
 Run `uv sync --frozen --extra dev` once, then `npm run check:generated`, `npm run verify`
 and `npm run build`. CI runs those checks with Node 24 and Python 3.14. npm dependencies
 remain pinned by the tracked package-lock.json.

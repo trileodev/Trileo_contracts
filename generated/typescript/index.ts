@@ -84,6 +84,13 @@ export type { RevokeAllSessionsCommand } from "./schemas/sessions/revoke-all-ses
 export type { RevokeSessionCommand } from "./schemas/sessions/revoke-session-command.js";
 export type { SessionResponse } from "./schemas/sessions/session-response.js";
 export type { SessionsPageResponse } from "./schemas/sessions/sessions-page-response.js";
+export type { GetUploadQuery } from "./schemas/uploads/get-upload-query.js";
+export type { ListUploadsQuery } from "./schemas/uploads/list-uploads-query.js";
+export type { MediaType } from "./schemas/uploads/media-type.js";
+export type { UploadOriginalName } from "./schemas/uploads/upload-original-name.js";
+export type { UploadResponse } from "./schemas/uploads/upload-response.js";
+export type { UploadStatus } from "./schemas/uploads/upload-status.js";
+export type { UploadsPageResponse } from "./schemas/uploads/uploads-page-response.js";
 export type { CurrentUserResponse } from "./schemas/users/current-user-response.js";
 export type { GetCurrentUserQuery } from "./schemas/users/get-current-user-query.js";
 export * from "./subjects.js";
