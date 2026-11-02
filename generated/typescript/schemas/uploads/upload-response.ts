@@ -15,6 +15,9 @@ export type UploadResponse = {
   createdAt: string;
   updatedAt: string;
 };
+/**
+ * Display-only filename. Rejects path separators, C0/C1 controls, BOM and bidi controls everywhere; Unicode whitespace is allowed only inside the name. Explicit character ranges keep JavaScript and Python validation identical.
+ */
 export type UploadOriginalName = string;
 export type MediaType = string;
 export type UploadStatus = "pending" | "ready" | "rejected" | "failed";
