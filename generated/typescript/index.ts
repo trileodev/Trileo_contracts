@@ -34,11 +34,13 @@ export type { ListProjectCollaboratorsQuery } from "./schemas/collaborators/list
 export type { ProjectCollaboratorResponse } from "./schemas/collaborators/project-collaborator-response.js";
 export type { ProjectCollaboratorsPageResponse } from "./schemas/collaborators/project-collaborators-page-response.js";
 export type { ProjectRole } from "./schemas/collaborators/project-role.js";
+export type { PurgeMemberCollaboratorsCommand } from "./schemas/collaborators/purge-member-collaborators-command.js";
 export type { RemoveProjectCollaboratorCommand } from "./schemas/collaborators/remove-project-collaborator-command.js";
 export type { UpdateProjectCollaboratorCommand } from "./schemas/collaborators/update-project-collaborator-command.js";
 export type { ActorContext } from "./schemas/common/actor-context.js";
 export type { AnonymousServiceRequest } from "./schemas/common/anonymous-service-request.js";
 export type { FieldError } from "./schemas/common/field-error.js";
+export type { InternalOrganizationCommandRequest } from "./schemas/common/internal-organization-command-request.js";
 export type { OrganizationServiceRequest } from "./schemas/common/organization-service-request.js";
 export type { PageRequest } from "./schemas/common/pagination.js";
 export type { PlatformRole } from "./schemas/common/platform-role.js";

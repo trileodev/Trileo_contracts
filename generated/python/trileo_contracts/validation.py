@@ -458,6 +458,16 @@ def is_project_role(value: Any) -> bool:
     return _is_valid("https://contracts.trileo.dev/v1/collaborators/project-role.schema.json", value)
 
 
+def validate_purge_member_collaborators_command(value: Any) -> None:
+    """Raise ContractViolation unless *value* is a valid PurgeMemberCollaboratorsCommand."""
+    _validate("https://contracts.trileo.dev/v1/collaborators/purge-member-collaborators-command.schema.json", value)
+
+
+def is_purge_member_collaborators_command(value: Any) -> bool:
+    """True when *value* is a valid PurgeMemberCollaboratorsCommand."""
+    return _is_valid("https://contracts.trileo.dev/v1/collaborators/purge-member-collaborators-command.schema.json", value)
+
+
 def validate_remove_project_collaborator_command(value: Any) -> None:
     """Raise ContractViolation unless *value* is a valid RemoveProjectCollaboratorCommand."""
     _validate("https://contracts.trileo.dev/v1/collaborators/remove-project-collaborator-command.schema.json", value)
@@ -506,6 +516,16 @@ def validate_field_error(value: Any) -> None:
 def is_field_error(value: Any) -> bool:
     """True when *value* is a valid FieldError."""
     return _is_valid("https://contracts.trileo.dev/v1/common/field-error.schema.json", value)
+
+
+def validate_internal_organization_command_request(value: Any) -> None:
+    """Raise ContractViolation unless *value* is a valid InternalOrganizationCommandRequest."""
+    _validate("https://contracts.trileo.dev/v1/common/internal-organization-command-request.schema.json", value)
+
+
+def is_internal_organization_command_request(value: Any) -> bool:
+    """True when *value* is a valid InternalOrganizationCommandRequest."""
+    return _is_valid("https://contracts.trileo.dev/v1/common/internal-organization-command-request.schema.json", value)
 
 
 def validate_organization_service_request(value: Any) -> None:

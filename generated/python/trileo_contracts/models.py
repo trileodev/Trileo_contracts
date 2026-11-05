@@ -198,6 +198,10 @@ class ProjectCollaboratorsPageResponse(TypedDict):
 ProjectRole = Literal["owner", "editor", "viewer"]
 
 
+class PurgeMemberCollaboratorsCommand(TypedDict):
+    userId: str
+
+
 class RemoveProjectCollaboratorCommand(TypedDict):
     projectId: str
     userId: str
@@ -226,6 +230,14 @@ class AnonymousServiceRequest(TypedDict):
 class FieldError(TypedDict):
     field: str
     message: str
+
+
+class InternalOrganizationCommandRequest(TypedDict):
+    version: Literal[1]
+    correlationId: str
+    causationId: NotRequired[str]
+    organizationId: str
+    payload: dict[str, Any]
 
 
 class OrganizationServiceRequest(TypedDict):

@@ -47,6 +47,7 @@ export const SUBJECTS = {
   "projectCollaboratorsAdd": "collaborators.add.v1",
   "projectCollaboratorsUpdate": "collaborators.update.v1",
   "projectCollaboratorsRemove": "collaborators.remove.v1",
+  "projectCollaboratorsPurgeMember": "collaborators.purge-member.v1",
   "organizationProjectsCreate": "projects.create.v2",
   "organizationProjectsList": "projects.list.v2",
   "organizationProjectsGet": "projects.get.v2",
