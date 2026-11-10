@@ -300,5 +300,11 @@
         }
       ]
     }
+  },
+  {
+    "schema": "https://contracts.trileo.dev/v1/collaborators/purge-member-collaborators-command.schema.json",
+    "data": {
+      "userId": "11111111-1111-4111-8111-111111111111"
+    }
   }
 ]

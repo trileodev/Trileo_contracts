@@ -792,6 +792,22 @@ SCHEMAS: Final[dict[str, dict[str, Any]]] = {
             "viewer",
         ],
     },
+    "https://contracts.trileo.dev/v1/collaborators/purge-member-collaborators-command.schema.json": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "$id": "https://contracts.trileo.dev/v1/collaborators/purge-member-collaborators-command.schema.json",
+        "title": "PurgeMemberCollaboratorsCommand",
+        "type": "object",
+        "additionalProperties": False,
+        "required": [
+            "userId",
+        ],
+        "properties": {
+            "userId": {
+                "type": "string",
+                "format": "uuid",
+            },
+        },
+    },
     "https://contracts.trileo.dev/v1/collaborators/remove-project-collaborator-command.schema.json": {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "$id": "https://contracts.trileo.dev/v1/collaborators/remove-project-collaborator-command.schema.json",
@@ -923,6 +939,40 @@ SCHEMAS: Final[dict[str, dict[str, Any]]] = {
                 "type": "string",
                 "minLength": 1,
                 "maxLength": 300,
+            },
+        },
+    },
+    "https://contracts.trileo.dev/v1/common/internal-organization-command-request.schema.json": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "$id": "https://contracts.trileo.dev/v1/common/internal-organization-command-request.schema.json",
+        "title": "InternalOrganizationCommandRequest",
+        "description": "Service-to-service command with no end-user actor. Each subject that uses it names exactly one publishing service; until NATS publish permissions exist (D27), that is enforced by review and a static check.",
+        "type": "object",
+        "additionalProperties": False,
+        "required": [
+            "version",
+            "correlationId",
+            "organizationId",
+            "payload",
+        ],
+        "properties": {
+            "version": {
+                "const": 1,
+            },
+            "correlationId": {
+                "type": "string",
+                "format": "uuid",
+            },
+            "causationId": {
+                "type": "string",
+                "format": "uuid",
+            },
+            "organizationId": {
+                "type": "string",
+                "format": "uuid",
+            },
+            "payload": {
+                "type": "object",
             },
         },
     },
@@ -2428,11 +2478,13 @@ SCHEMA_BY_TITLE: Final[dict[str, str]] = {
     "ProjectCollaboratorResponse": "https://contracts.trileo.dev/v1/collaborators/project-collaborator-response.schema.json",
     "ProjectCollaboratorsPageResponse": "https://contracts.trileo.dev/v1/collaborators/project-collaborators-page-response.schema.json",
     "ProjectRole": "https://contracts.trileo.dev/v1/collaborators/project-role.schema.json",
+    "PurgeMemberCollaboratorsCommand": "https://contracts.trileo.dev/v1/collaborators/purge-member-collaborators-command.schema.json",
     "RemoveProjectCollaboratorCommand": "https://contracts.trileo.dev/v1/collaborators/remove-project-collaborator-command.schema.json",
     "UpdateProjectCollaboratorCommand": "https://contracts.trileo.dev/v1/collaborators/update-project-collaborator-command.schema.json",
     "ActorContext": "https://contracts.trileo.dev/v1/common/actor-context.schema.json",
     "AnonymousServiceRequest": "https://contracts.trileo.dev/v1/common/anonymous-service-request.schema.json",
     "FieldError": "https://contracts.trileo.dev/v1/common/field-error.schema.json",
+    "InternalOrganizationCommandRequest": "https://contracts.trileo.dev/v1/common/internal-organization-command-request.schema.json",
     "OrganizationServiceRequest": "https://contracts.trileo.dev/v1/common/organization-service-request.schema.json",
     "PageRequest": "https://contracts.trileo.dev/v1/common/pagination.schema.json",
     "PlatformRole": "https://contracts.trileo.dev/v1/common/platform-role.schema.json",
